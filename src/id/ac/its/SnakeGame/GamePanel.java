@@ -27,7 +27,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	boolean running = false;
 	Timer timer;
 	Random random;
-	private  private Image apples;
+	private Image apples;
+	private Image kepala;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
@@ -38,42 +39,56 @@ public class GamePanel extends JPanel implements ActionListener {
 		startGame(DELAY);
 	}
 	
-	private void loadImages() {
+	/*private void loadImages() {
         ImageIcon app = new ImageIcon("img/apples.png");
         apples = app.getImage();
-	}
+        
+        ImageIcon iih = new ImageIcon("img/kanan.png");
+        kepala = iih.getImage();
+	}*/
 	
 	public void startGame(final int DELAY) {
 		newApple();
 		running = true;
 		timer = new Timer(DELAY,this);
 		timer.start();
+		
+		ImageIcon kiri = new ImageIcon("img/kanan.png");
+	    kepala = kiri.getImage();
 	}
 		
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
+		
+		
+		
 	}
 	public void draw(Graphics g) {
-		
-		if(running) {
-			/*
-			for(int i=0;i<SCREEN_HEIGHT/UNIT_SIZE;i++) {
-				g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, SCREEN_HEIGHT);
-				g.drawLine(0, i*UNIT_SIZE, SCREEN_WIDTH, i*UNIT_SIZE);
-			}
-			*/
-			g.setColor(Color.red);
-			g.fillOval(apples, appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+		ImageIcon app = new ImageIcon("img/apples.png");
+	    apples = app.getImage();
+	    
+	    
+	    if(running) {
+			//g.setColor(Color.red);
+			// g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+			
+			
+	        g.drawImage(apples, appleX, appleY, this);
 		
 			for(int i = 0; i< bodyParts;i++) {
 				if(i == 0) {
-					g.setColor(Color.green);
-					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+					
+					g.drawImage(kepala, x[i], y[i], this);
+					//g.setColor(Color.blue);
+					//g.fill3DRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE, true);
+					//g.setColor(Color.white);
+					//g.fillOval(x[i]+(UNIT_SIZE/5/2), y[i]+(UNIT_SIZE/5/2), UNIT_SIZE/5*4, UNIT_SIZE/5*4);
 				}
 				else {
 					g.setColor(new Color(45,180,0));
 					//g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
+					// g.drawOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 					g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
@@ -172,27 +187,36 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	public class MyKeyAdapter extends KeyAdapter{
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
 				if(direction != 'R') {
 					direction = 'L';
+					ImageIcon kiri = new ImageIcon("img/kiri.png");
+       	 			kepala = kiri.getImage();
 				}
 				break;
 			case KeyEvent.VK_RIGHT:
 				if(direction != 'L') {
 					direction = 'R';
+					ImageIcon kiri = new ImageIcon("img/kanan.png");
+       	 			kepala = kiri.getImage();
 				}
 				break;
 			case KeyEvent.VK_UP:
 				if(direction != 'D') {
 					direction = 'U';
+					ImageIcon kiri = new ImageIcon("img/atas.png");
+       	 			kepala = kiri.getImage();
 				}
 				break;
 			case KeyEvent.VK_DOWN:
 				if(direction != 'U') {
 					direction = 'D';
+					ImageIcon kiri = new ImageIcon("img/bawah.png");
+       	 			kepala = kiri.getImage();
 				}
 				break;
 			}
