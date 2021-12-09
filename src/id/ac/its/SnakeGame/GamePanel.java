@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	boolean running = false;
 	Timer timer;
 	Random random;
+	private  private Image apple;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
@@ -36,12 +37,19 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.addKeyListener(new MyKeyAdapter());
 		startGame(DELAY);
 	}
+	
+	private void loadImages() {
+        ImageIcon app = new ImageIcon("img/apple.png");
+        apple = app.getImage();
+	}
+	
 	public void startGame(final int DELAY) {
 		newApple();
 		running = true;
 		timer = new Timer(DELAY,this);
 		timer.start();
 	}
+		
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
@@ -56,7 +64,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 			*/
 			g.setColor(Color.red);
-			g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+			g.fillOval(apple, appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 		
 			for(int i = 0; i< bodyParts;i++) {
 				if(i == 0) {
