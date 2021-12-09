@@ -21,8 +21,22 @@ public class Game {
 		public void actionPerformed(ActionEvent event){
 			String yourChoice = event.getActionCommand();
 			if (yourChoice.equals("start")) {
-				vm.titleToTown();
-				
+				vm.levelSelector();
+			}
+			if (yourChoice.equals("c1")) {
+				// vm.MainGame();
+				new GameFrame(50);
+				vm.showTitleScreen();
+				}
+			if (yourChoice.equals("c2")) {
+				// vm.MainGame();
+				new GameFrame(100);
+				vm.showTitleScreen();
+			}
+			if (yourChoice.equals("c3")) {
+				// vm.MainGame();
+				new GameFrame(200);
+				vm.showTitleScreen();
 			}
 		}
 	}

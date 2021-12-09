@@ -22,11 +22,17 @@ public class VisibilityManager {
         ui.gamePanel.setVisible(false);
     }
 	
-	public void titleToTown(){
+	public void levelSelector(){
         // hide screen
         ui.titleNamePanel.setVisible(false);
         ui.startButtonPanel.setVisible(false);
+
+        // show Level Option
+        ui.mainTextPanel.setVisible(true);
+        ui.ChoiceButtonPanel.setVisible(true);
+        ui.highScoreInfo.setVisible(true);
         
-        new GameFrame(100);
+        // Game Dropzone
+        ui.gamePanel.setVisible(false);
     }
 }
