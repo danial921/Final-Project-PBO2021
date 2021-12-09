@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private void loadImages() {
         ImageIcon app = new ImageIcon("img/apples.png");
-        apple = app.getImage();
+        apples = app.getImage();
 	}
 	
 	public void startGame(final int DELAY) {
@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 			*/
 			g.setColor(Color.red);
-			g.fillOval(apple, appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+			g.fillOval(apples, appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 		
 			for(int i = 0; i< bodyParts;i++) {
 				if(i == 0) {
