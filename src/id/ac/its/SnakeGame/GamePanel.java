@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	boolean running = false;
 	Timer timer;
 	Random random;
-	private  private Image apple;
+	private  private Image apples;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	private void loadImages() {
-        ImageIcon app = new ImageIcon("img/apple.png");
+        ImageIcon app = new ImageIcon("img/apples.png");
         apple = app.getImage();
 	}
 	
