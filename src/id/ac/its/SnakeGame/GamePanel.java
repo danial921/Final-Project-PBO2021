@@ -14,9 +14,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	static final int SCREEN_WIDTH = 1300;
 	static final int SCREEN_HEIGHT = 750;
-	static final int UNIT_SIZE = 50;
+	static final int UNIT_SIZE = 25;
 	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
-	static final int DELAY = 120;
+//	static final int DELAY = 120;
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
@@ -28,15 +28,15 @@ public class GamePanel extends JPanel implements ActionListener {
 	Timer timer;
 	Random random;
 	
-	GamePanel(){
+	GamePanel(final int DELAY){
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
-		startGame();
+		startGame(DELAY);
 	}
-	public void startGame() {
+	public void startGame(final int DELAY) {
 		newApple();
 		running = true;
 		timer = new Timer(DELAY,this);
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				else {
 					g.setColor(new Color(45,180,0));
 					//g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
-					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+					g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
 			g.setColor(Color.red);
@@ -190,5 +190,4 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-
 }
