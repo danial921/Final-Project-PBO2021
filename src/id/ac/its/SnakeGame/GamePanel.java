@@ -171,6 +171,31 @@ public class GamePanel extends JPanel implements ActionListener {
 			timer.stop();
 		}
 	}
+	
+	public void highscoreinisiate (){
+		File file = new File("highscore.txt");
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            while (line != null) {
+            	try	{
+                    score2 = Integer.parseInt(line.trim());
+                    if (score2 >= highScore)               
+                    { 
+                        highScore = score2; 
+                    }
+                } catch (NumberFormatException e1) {
+                    System.err.println("ignoring invalid score: " + line);
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+		}
+		catch (IOException ex) {
+            System.err.println("ERROR reading scores from file");
+		}
+	}
 	public void gameOver(Graphics g) {
 		try {
 			PrintWriter writer = new PrintWriter(new FileWriter("highscore.txt", true));
