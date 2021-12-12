@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Image apples;
 	private Image kepala;
 	int score;
+	int score2;
 	int highScore;
 	
 	GamePanel(final int DELAY){
