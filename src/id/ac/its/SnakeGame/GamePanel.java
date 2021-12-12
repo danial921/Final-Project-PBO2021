@@ -38,7 +38,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Image apples;
 	private Image kepala;
 	int score;
-	int score2;
 	int highScore;
 	
 	GamePanel(final int DELAY){
@@ -77,6 +76,29 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon app = new ImageIcon("img/apples.png");
 	    apples = app.getImage();
 	    
+	    File file = new File("highscore.txt");
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            while (line != null) {
+            	try	{
+                    score = Integer.parseInt(line.trim());
+                    if (score >= highScore)               
+                    { 
+                        highScore = score; 
+                    }
+                } catch (NumberFormatException e1) {
+                    System.err.println("ERROR invalid score: " + line);
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+		}
+		catch (IOException ex) {
+            System.err.println("ERROR reading score");
+		}
+	    
 	    if(running) {
 			//g.setColor(Color.red);
 			// g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
@@ -103,7 +125,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			g.setColor(Color.red);
 			g.setFont( new Font("Ink Free",Font.BOLD, 40));
 			FontMetrics metrics = getFontMetrics(g.getFont());
-			g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+			g.drawString("Score: "+applesEaten + ",  High Score :" + highScore, (SCREEN_WIDTH - metrics.stringWidth("Score: "+ applesEaten + ", High Score :" + highScore))/2, g.getFont().getSize());
 		}
 		else {
 			gameOver(g);
@@ -172,31 +194,6 @@ public class GamePanel extends JPanel implements ActionListener {
 			timer.stop();
 		}
 	}
-	
-	public void highscoreinisiate (){
-		File file = new File("highscore.txt");
-		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = reader.readLine();
-            while (line != null) {
-            	try	{
-                    score2 = Integer.parseInt(line.trim());
-                    if (score2 >= highScore)               
-                    { 
-                        highScore = score2; 
-                    }
-                } catch (NumberFormatException e1) {
-                    System.err.println("ignoring invalid score: " + line);
-                }
-                line = reader.readLine();
-            }
-            reader.close();
-		}
-		catch (IOException ex) {
-            System.err.println("ERROR reading scores from file");
-		}
-	}
 	public void gameOver(Graphics g) {
 		try {
 			PrintWriter writer = new PrintWriter(new FileWriter("highscore.txt", true));
@@ -220,14 +217,14 @@ public class GamePanel extends JPanel implements ActionListener {
                         highScore = score; 
                     }
                 } catch (NumberFormatException e1) {
-                    System.err.println("ERROR");
+                    System.err.println("ERROR invalid score: " + line);
                 }
                 line = reader.readLine();
             }
             reader.close();
 		}
 		catch (IOException ex) {
-            System.err.println("ERROR");
+            System.err.println("ERROR reading score");
 		}
 		
 		//Score
