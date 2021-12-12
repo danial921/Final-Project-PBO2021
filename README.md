@@ -27,4 +27,5 @@ Fitur-fitur yang kami tambahkan adalah sebagai berikut.
 **Daftar Reverensi**
 ```
 Referensi Snake Game : https://www.youtube.com/watch?v=bI6e6qjJ8JQ
+Referensi High Score : https://stackoverflow.com/questions/34832069/creating-a-highscore-with-file-io-in-java
 ```
