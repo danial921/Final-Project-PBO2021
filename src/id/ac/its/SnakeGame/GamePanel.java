@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Image kepala;
 	int score;
 	int highScore;
+	Font test;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
@@ -122,8 +123,8 @@ public class GamePanel extends JPanel implements ActionListener {
 					g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
-			g.setColor(Color.red);
-			g.setFont( new Font("Ink Free",Font.BOLD, 40));
+			g.setColor(Color.white);
+			g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 			FontMetrics metrics = getFontMetrics(g.getFont());
 			g.drawString("Score: "+applesEaten + ",  High Score :" + highScore, (SCREEN_WIDTH - metrics.stringWidth("Score: "+ applesEaten + ", High Score :" + highScore))/2, g.getFont().getSize());
 		}
@@ -228,20 +229,20 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		
 		//Score
-		g.setColor(Color.red);
-		g.setFont( new Font("Ink Free",Font.BOLD, 40));
+		g.setColor(Color.white);
+		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
-		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, (int) (SCREEN_HEIGHT/1.7));
 		//Game Over text
 		g.setColor(Color.red);
-		g.setFont( new Font("Ink Free",Font.BOLD, 75));
+		g.setFont( new Font("Agency FB",Font.PLAIN, 100));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
-		g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+		g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, (int) (SCREEN_HEIGHT/2.5));
 		
-		g.setColor(Color.red);
-		g.setFont( new Font("Ink Free",Font.BOLD, 50));
+		g.setColor(Color.white);
+		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 		FontMetrics metrics3 = getFontMetrics(g.getFont());
-		g.drawString("High Score: " + highScore , (SCREEN_WIDTH - metrics3.stringWidth("High Score : " + highScore))/2, SCREEN_HEIGHT/3);
+		g.drawString("High Score: " + highScore , (SCREEN_WIDTH - metrics3.stringWidth("High Score : " + highScore))/2, (int) (SCREEN_HEIGHT/2));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
