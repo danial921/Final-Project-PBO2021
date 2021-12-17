@@ -25,7 +25,7 @@ public class Game {
 			}
 			if (yourChoice.equals("c1")) {
 				// vm.MainGame();
-				new GameFrame(50);
+				new GameFrame(60);
 				vm.showTitleScreen();
 				}
 			if (yourChoice.equals("c2")) {
