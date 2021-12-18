@@ -38,7 +38,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Image kepala;
 	int score;
 	int highScore;
-	Font test;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
