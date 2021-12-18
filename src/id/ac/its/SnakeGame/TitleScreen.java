@@ -143,10 +143,4 @@ public class TitleScreen {
 		window.setVisible(true);
 
 	}
-
-	public void setVisible(boolean b) {
-	}
-
-	
-
 }

@@ -3,8 +3,15 @@ package id.ac.its.SnakeGame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import java.util.Random;
 
@@ -12,10 +19,11 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	static final int SCREEN_WIDTH = 1300;
-	static final int SCREEN_HEIGHT = 750;
+	Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+	int SCREEN_WIDTH = (int)size.width;
+	int SCREEN_HEIGHT = (int)size.height;
 	static final int UNIT_SIZE = 25;
-	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
+	int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
 //	static final int DELAY = 120;
 	final int x[] = new int[GAME_UNITS];
 	final int y[] = new int[GAME_UNITS];
@@ -29,6 +37,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	Random random;
 	private Image apples;
 	private Image kepala;
+	int score;
+	int highScore;
+	Font test;
 	
 	GamePanel(final int DELAY){
 		random = new Random();
@@ -60,14 +71,34 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
-		
-		
-		
 	}
+	
 	public void draw(Graphics g) {
 		ImageIcon app = new ImageIcon("img/apples.png");
 	    apples = app.getImage();
 	    
+	    File file = new File("highscore.txt");
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            while (line != null) {
+            	try	{
+                    score = Integer.parseInt(line.trim());
+                    if (score >= highScore)               
+                    { 
+                        highScore = score; 
+                    }
+                } catch (NumberFormatException e1) {
+                    System.err.println("ERROR invalid score: " + line);
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+		}
+		catch (IOException ex) {
+            System.err.println("ERROR reading score");
+		}
 	    
 	    if(running) {
 			//g.setColor(Color.red);
@@ -92,16 +123,17 @@ public class GamePanel extends JPanel implements ActionListener {
 					g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
-			g.setColor(Color.red);
-			g.setFont( new Font("Ink Free",Font.BOLD, 40));
+			g.setColor(Color.white);
+			g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 			FontMetrics metrics = getFontMetrics(g.getFont());
-			g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+			g.drawString("Score: "+applesEaten + ",  High Score :" + highScore, (SCREEN_WIDTH - metrics.stringWidth("Score: "+ applesEaten + ", High Score :" + highScore))/2, g.getFont().getSize());
 		}
 		else {
 			gameOver(g);
 		}
 		
 	}
+	
 	public void newApple(){
 		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
 		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
@@ -164,16 +196,53 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 	}
 	public void gameOver(Graphics g) {
+		try {
+			PrintWriter writer = new PrintWriter(new FileWriter("highscore.txt", true));
+            writer.println(applesEaten);              
+            writer.close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		File file = new File("highscore.txt");
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            while (line != null) {
+            	try	{
+                    score = Integer.parseInt(line.trim());
+                    if (score >= highScore)               
+                    { 
+                        highScore = score; 
+                    }
+                } catch (NumberFormatException e1) {
+                    System.err.println("ERROR invalid score: " + line);
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+		}
+		catch (IOException ex) {
+            System.err.println("ERROR reading score");
+		}
+		
 		//Score
-		g.setColor(Color.red);
-		g.setFont( new Font("Ink Free",Font.BOLD, 40));
+		g.setColor(Color.white);
+		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
-		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, (int) (SCREEN_HEIGHT/1.7));
 		//Game Over text
 		g.setColor(Color.red);
-		g.setFont( new Font("Ink Free",Font.BOLD, 75));
+		g.setFont( new Font("Agency FB",Font.PLAIN, 100));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
-		g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+		g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, (int) (SCREEN_HEIGHT/2.5));
+		
+		g.setColor(Color.white);
+		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
+		FontMetrics metrics3 = getFontMetrics(g.getFont());
+		g.drawString("High Score: " + highScore , (SCREEN_WIDTH - metrics3.stringWidth("High Score : " + highScore))/2, (int) (SCREEN_HEIGHT/2));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
