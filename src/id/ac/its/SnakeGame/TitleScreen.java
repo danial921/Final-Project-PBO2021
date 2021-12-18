@@ -25,12 +25,7 @@ public class TitleScreen {
 	JTextArea mainTextArea;
 	static final int SCREEN_WIDTH = 1300;
 	static final int SCREEN_HEIGHT = 750;
-	//Font Handling
-	Font titleFont = new Font("Times New Roman", Font.PLAIN, 85);
-	Font normalFont = new Font("arial", Font.PLAIN, 30);
 	Font titleFont1;
-	Font itimFont;
-	//Color Handling
 	Color transparent = new Color(0,0,0,0);
 	
 	public void createUI(ChoiceHandler choiceHandler) {
