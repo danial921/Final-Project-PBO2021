@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements ActionListener {
 
 	Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-	int SCREEN_WIDTH = (int)size.width;
-	int SCREEN_HEIGHT = (int)size.height;
+	static final int SCREEN_WIDTH = 1300;
+	static final int SCREEN_HEIGHT = 750;
 	static final int UNIT_SIZE = 25;
 	int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
 //	static final int DELAY = 120;
@@ -49,14 +49,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.addKeyListener(new MyKeyAdapter());
 		startGame(DELAY);
 	}
-	
-	/*private void loadImages() {
-        ImageIcon app = new ImageIcon("img/apples.png");
-        apples = app.getImage();
-        
-        ImageIcon iih = new ImageIcon("img/kanan.png");
-        kepala = iih.getImage();
-	}*/
 	
 	public void startGame(final int DELAY) {
 		newApple();
@@ -111,22 +103,16 @@ public class GamePanel extends JPanel implements ActionListener {
 				if(i == 0) {
 					
 					g.drawImage(kepala, x[i], y[i], this);
-					//g.setColor(Color.blue);
-					//g.fill3DRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE, true);
-					//g.setColor(Color.white);
-					//g.fillOval(x[i]+(UNIT_SIZE/5/2), y[i]+(UNIT_SIZE/5/2), UNIT_SIZE/5*4, UNIT_SIZE/5*4);
 				}
 				else {
 					g.setColor(new Color(45,180,0));
-					//g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
-					// g.drawOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 					g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
 			g.setColor(Color.white);
 			g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 			FontMetrics metrics = getFontMetrics(g.getFont());
-			g.drawString("Score: "+applesEaten + ",  High Score :" + highScore, (SCREEN_WIDTH - metrics.stringWidth("Score: "+ applesEaten + ", High Score :" + highScore))/2, g.getFont().getSize());
+			g.drawString("Score : "+applesEaten + ", High Score : " + highScore, (SCREEN_WIDTH - metrics.stringWidth("Score : "+ applesEaten + ", High Score : " + highScore))/2, g.getFont().getSize());
 		}
 		else {
 			gameOver(g);
@@ -232,7 +218,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setColor(Color.white);
 		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 		FontMetrics metrics1 = getFontMetrics(g.getFont());
-		g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, (int) (SCREEN_HEIGHT/1.7));
+		g.drawString("Score : "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score : "+applesEaten))/2, (int) (SCREEN_HEIGHT/1.7));
 		//Game Over text
 		g.setColor(Color.red);
 		g.setFont( new Font("Agency FB",Font.PLAIN, 100));
@@ -242,7 +228,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setColor(Color.white);
 		g.setFont( new Font("Agency FB",Font.PLAIN, 40));
 		FontMetrics metrics3 = getFontMetrics(g.getFont());
-		g.drawString("High Score: " + highScore , (SCREEN_WIDTH - metrics3.stringWidth("High Score : " + highScore))/2, (int) (SCREEN_HEIGHT/2));
+		g.drawString("High Score : " + highScore , (SCREEN_WIDTH - metrics3.stringWidth("High Score : " + highScore))/2, (int) (SCREEN_HEIGHT/2));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
