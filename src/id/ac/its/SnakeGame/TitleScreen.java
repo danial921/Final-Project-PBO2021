@@ -23,7 +23,8 @@ public class TitleScreen {
 	JLabel titleNameLabel,highLabel;
 	JButton startButton,choice1,choice2,choice3, choice4;
 	JTextArea mainTextArea;
-
+	static final int SCREEN_WIDTH = 1300;
+	static final int SCREEN_HEIGHT = 750;
 	//Font Handling
 	Font titleFont = new Font("Times New Roman", Font.PLAIN, 85);
 	Font normalFont = new Font("arial", Font.PLAIN, 30);
@@ -35,7 +36,7 @@ public class TitleScreen {
 	public void createUI(ChoiceHandler choiceHandler) {
 		window = new JFrame();
 		window.pack();
-		window.setSize(1300, 750);
+		window.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		window.setLocationRelativeTo(null);
 		window.setTitle("PBO-Nihboss");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
