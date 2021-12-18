@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 	static final int SCREEN_WIDTH = 1300;
 	static final int SCREEN_HEIGHT = 750;
 	static final int UNIT_SIZE = 25;
