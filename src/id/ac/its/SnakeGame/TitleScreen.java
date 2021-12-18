@@ -21,7 +21,7 @@ public class TitleScreen {
 	JPanel titleNamePanel, startButtonPanel,mainTextPanel, ChoiceButtonPanel, highScoreInfo;
 	JPanel gamePanel;
 	JLabel titleNameLabel,highLabel;
-	JButton startButton,choice1,choice2,choice3, choice4;
+	JButton startButton,choice1,choice2,choice3;
 	JTextArea mainTextArea;
 	static final int SCREEN_WIDTH = 1300;
 	static final int SCREEN_HEIGHT = 750;
