@@ -48,9 +48,6 @@ public class TitleScreen {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			titleFont1 = Font.createFont(Font.TRUETYPE_FONT, new File("font\\IrishGrover.ttf")).deriveFont(85f);
 			ge.registerFont(titleFont1);
-			itimFont = Font.createFont(Font.TRUETYPE_FONT, new File("font\\Itim-Regular.ttf")).deriveFont(35f);
-			ge.registerFont(itimFont);
-
 		} 
 		catch(Exception e){
 			e.printStackTrace();
